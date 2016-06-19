@@ -1,5 +1,7 @@
 After (Close all extra windows):
-  2,9windo close
+  for @_ in range(8)
+    close
+  endfor
   AssertEqual 1, winnr('$')
 
 Before (Make 9 windows and go to top left):
@@ -127,7 +129,9 @@ Execute (Resize middle window right):
   endif
 
 After (Close all extra windows):
-  2,4windo close
+  for @_ in range(3)
+    close
+  endfor
   AssertEqual 1, winnr('$')
 
 Before (Simple split):
