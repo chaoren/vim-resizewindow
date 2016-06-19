@@ -1,0 +1,156 @@
+After (Close all extra windows):
+  2,9windo close
+  AssertEqual 1, winnr('$')
+
+Before (Make 9 windows and go to top left):
+  vsplit | vsplit | windo split | split
+  AssertEqual 9, winnr('$')
+  1wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Execute (Resize top left window left):
+  execute 'normal' "\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) < width
+
+Execute (Resize top left window down):
+  execute 'normal' "\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) > height
+
+Execute (Resize top left window up):
+  execute 'normal' "\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) < height
+
+Execute (Resize top left window right):
+  execute 'normal' "\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) > width
+
+Before (Make 9 windows and go to bottom right):
+  vsplit | vsplit | windo split | split
+  AssertEqual 9, winnr('$')
+  9wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Execute (Resize bottom right window left):
+  execute 'normal' "\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) > width
+
+Execute (Resize bottom right window down):
+  execute 'normal' "\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) < height
+
+Execute (Resize bottom right window up):
+  execute 'normal' "\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) > height
+
+Execute (Resize bottom right window right):
+  execute 'normal' "\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) < width
+
+Before (Make 9 windows and go to center):
+  vsplit | vsplit | windo split | split
+  AssertEqual 9, winnr('$')
+  5wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+  wincmd h
+  let left = winnr()
+  2wincmd l
+  let right = winnr()
+  wincmd h
+  wincmd k
+  let top = winnr()
+  2wincmd j
+  let bottom = winnr()
+  wincmd k
+  let left_width = winwidth(left)
+  let right_width = winwidth(right)
+  let top_height = winheight(top)
+  let bottom_height = winheight(bottom)
+  AssertEqual 5, winnr()
+
+Execute (Resize middle window left):
+  execute 'normal' "\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  AssertNotEqual width, winwidth(0)
+  if winwidth(0) < width
+    AssertEqual left_width, winwidth(left)
+    Assert winwidth(right) > right_width
+  else
+    Assert winwidth(left) < left_width
+    AssertEqual right_width, winwidth(right)
+  endif
+
+Execute (Resize middle window down):
+  execute 'normal' "\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  AssertNotEqual height, winheight(0)
+  if winheight(0) < height
+    AssertEqual bottom_height, winheight(bottom)
+    Assert winheight(top) > top_height
+  else
+    Assert winheight(bottom) < bottom_height
+    AssertEqual top_height, winheight(top)
+  endif
+
+Execute (Resize middle window up):
+  execute 'normal' "\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  AssertNotEqual height, winheight(0)
+  if winheight(0) < height
+    Assert winheight(bottom) > bottom_height
+    AssertEqual top_height, winheight(top)
+  else
+    AssertEqual bottom_height, winheight(bottom)
+    Assert winheight(top) < top_height
+  endif
+
+Execute (Resize middle window right):
+  execute 'normal' "\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  AssertNotEqual width, winwidth(0)
+  if winwidth(0) < width
+    Assert winwidth(left) > left_width
+    AssertEqual right_width, winwidth(right)
+  else
+    AssertEqual left_width, winwidth(left)
+    Assert winwidth(right) < right_width
+  endif
+
+After (Close all extra windows):
+  2,4windo close
+  AssertEqual 1, winnr('$')
+
+Before (Simple split):
+  vsplit | windo split
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Execute (Resize by 20 to the left):
+  execute 'normal' "20\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  AssertEqual 20, abs(width - winwidth(0))
+
+Execute (Resize by 20 to the bottom):
+  execute 'normal' "20\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  AssertEqual 20, abs(height - winheight(0))
+
+Execute (Resize by 20 to the top):
+  execute 'normal' "20\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  AssertEqual 20, abs(height - winheight(0))
+
+Execute (Resize by 20 to the right):
+  execute 'normal' "20\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  AssertEqual 20, abs(width - winwidth(0))
