@@ -18,7 +18,7 @@ for s:direction in [ 'h', 'j', 'k', 'l' ] " {{{
 		let s:lhs = '<silent>' . s:mappings[s:direction]
 		let s:d = "'" . s:flags[s:direction] . "'"
 		let s:args = join([ 'v:count1', s:d ], ', ')
-		let s:rhs = ":\<C-U>call \<SID>ResizeWindow(" . s:args . ")\<CR>"
+		let s:rhs = ':<C-U>call <SID>ResizeWindow(' . s:args . ')<CR>'
 		execute s:map s:lhs s:rhs
 	endfor
 endfor " }}}
