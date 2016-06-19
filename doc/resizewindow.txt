@@ -29,10 +29,10 @@ Use |g:resizewindow_mappings| to replace the default mappings.
 E.g.,
 >
 	let g:resizewindow_mappings = {
-	\ 'h' : '<C-W>-',
-	\ 'j' : '<C-W><',
-	\ 'k' : '<C-W>>',
-	\ 'l' : '<C-W>+'
+	\ 'h' : '<C-W><',
+	\ 'j' : '<C-W>+',
+	\ 'k' : '<C-W>-',
+	\ 'l' : '<C-W>>'
 	\ }
 <
 Unspecified entries will still use the default mappings.
