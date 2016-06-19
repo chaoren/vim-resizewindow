@@ -1,0 +1,67 @@
+Before (Unload plugin):
+  unlet! g:loaded_resizewindow
+
+After (Clear settings):
+  unlet! g:resizewindow_mappings
+
+Execute (Check default mappings):
+  let directions = [ 'h', 'j', 'k', 'l' ]
+  for direction in directions
+    let map = '<C-W><C-' . direction . '>'
+    Assert hasmapto('ResizeWindow', 'n')
+    execute 'nunmap' map
+    Assert hasmapto('ResizeWindow', 'x')
+    execute 'xunmap' map
+    Assert hasmapto('ResizeWindow', 'o')
+    execute 'ounmap' map
+  endfor
+  Assert !hasmapto('ResizeWindow')
+
+Execute (Check custom mappings):
+  let g:resizewindow_mappings = {
+  \ 'h' : '<M-h>',
+  \ 'j' : '<M-j>',
+  \ 'k' : '<M-k>',
+  \ 'l' : '<M-l>',
+  \ }
+  runtime plugin/resizewindow.vim
+  let maps = [ '<M-h>', '<M-j>', '<M-k>', '<M-l>' ]
+  for map in maps
+    Assert hasmapto('ResizeWindow', 'n')
+    execute 'nunmap' map
+    Assert hasmapto('ResizeWindow', 'x')
+    execute 'xunmap' map
+    Assert hasmapto('ResizeWindow', 'o')
+    execute 'ounmap' map
+  endfor
+  Assert !hasmapto('ResizeWindow')
+
+Execute (Check missing mappings):
+  let g:resizewindow_mappings = {
+  \ 'h' : '<M-h>',
+  \ 'j' : '<M-j>',
+  \ }
+  runtime plugin/resizewindow.vim
+  let maps = [ '<M-h>', '<M-j>', '<C-W><C-K>', '<C-W><C-L>' ]
+  for map in maps
+    Assert hasmapto('ResizeWindow', 'n')
+    execute 'nunmap' map
+    Assert hasmapto('ResizeWindow', 'x')
+    execute 'xunmap' map
+    Assert hasmapto('ResizeWindow', 'o')
+    execute 'ounmap' map
+  endfor
+  Assert !hasmapto('ResizeWindow')
+
+Execute (Check no mappings):
+  let g:resizewindow_mappings = {
+  \ 'h' : '',
+  \ 'j' : '',
+  \ 'k' : '',
+  \ 'l' : '',
+  \ }
+  runtime plugin/resizewindow.vim
+  Assert !hasmapto('ResizeWindow')
+
+Execute (Load plugin for further tests):
+  runtime plugin/resizewindow.vim
