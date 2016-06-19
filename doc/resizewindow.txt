@@ -1,0 +1,41 @@
+*resizewindow.txt* More intuitive way to resize windows in Vim
+
+INTRODUCTION					*resizewindow*
+
+This plugin provides direction based resizing of windows.
+
+Using <C-W>+, <C-W>-, <C-W><, and <C-W>> to resize windows can be
+disorienting since <C-W>< and <C-W>> looks like they should be moving the
+window divider left and right, respectively, but they don't.
+
+MAPPINGS					*resizewindow-mappings*
+
+						*resizewindow-CTRL-W_CTRL_H*
+CTRL-W CTRL-H	Resize current window to the left by N (default 1).
+
+						*resizewindow-CTRL-W_CTRL_J*
+CTRL-W CTRL-J	Resize current window downwards by N (default 1).
+
+						*resizewindow-CTRL-W_CTRL_K*
+CTRL-W CTRL-K	Resize current window upwards by N (default 1).
+
+						*resizewindow-CTRL-W_CTRL_L*
+CTRL-W CTRL-L	Resize current window to the right by N (default 1).
+
+CUSTOMIZATION					*resizewindow-customization*
+
+						*g:resizewindow_mappings*
+Use |g:resizewindow_mappings| to replace the default mappings.
+E.g.,
+>
+	let g:resizewindow_mappings = {
+	\ 'h' : '<C-W>-',
+	\ 'j' : '<C-W><',
+	\ 'k' : '<C-W>>',
+	\ 'l' : '<C-W>+'
+	\ }
+<
+Unspecified entries will still use the default mappings.
+Set the value to an empty string to disable the mapping.
+
+ vim:tw=78:ts=8:ft=help:norl:
