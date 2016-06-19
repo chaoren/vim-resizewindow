@@ -6,8 +6,9 @@ More intuitive way to resize windows in Vim
 This plugin provides direction based resizing of windows.
 
 Using `<C-W>+`, `<C-W>-`, `<C-W><`, and `<C-W>>` to resize windows can be
-disorienting since `<C-W><` and `<C-W>>` looks like they should be moving the
-window divider left and right, respectively, but they don't.
+disorienting since `<C-W><` and `<C-W>>` look like they should always be moving
+the window divider left and right, respectively, but they don't if you're in the
+right most window.
 
 Customization
 =============
