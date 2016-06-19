@@ -25,5 +25,5 @@ let g:resizewindow_mappings = {
 \ 'l' : '<C-W>+'
 \ }
 ```
-Unspecified entries will still use the default mappings.
+Unspecified entries will still use the default mappings.  
 Set the value to an empty string to disable the mapping.
