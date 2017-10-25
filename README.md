@@ -16,15 +16,14 @@ Customization
 The default mappings are `<C-W><C-H>`, `<C-W><C-J>`, `<C-W><C-K>`, and
 `<C-W><C-L>`.
 
-Use `g:resizewindow_mappings` to replace the default mappings.  
-E.g.,
+Use the `<Plug>ResizeWindow[DIR]` mappings to replace the default mappings.
+E.g.
 ```
-let g:resizewindow_mappings = {
-\ 'h' : '<C-W><',
-\ 'j' : '<C-W>+',
-\ 'k' : '<C-W>-',
-\ 'l' : '<C-W>>'
-\ }
+map <C-W><C-K> <Plug>ResizeWindowUp
+map <C-W><C-J> <Plug>ResizeWindowDown
+map <C-W><C-H> <Plug>ResizeWindowLeft
+map <C-W><C-L> <Plug>ResizeWindowRight
 ```
-Unspecified entries will still use the default mappings.  
-Set the value to an empty string to disable the mapping.
+Note that since `<Plug>ResizeWindow[DIR]` is itself a mapping, `noremap` will
+not work.
+To disable the mapping, set `g:resizewindow_mappings = 0`.
