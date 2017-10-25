@@ -3,23 +3,27 @@ if exists('g:loaded_resizewindow')
 endif
 let g:loaded_resizewindow = 1
 
-let s:mappings = get(g:, 'resizewindow_mappings', { })
+if !exists("g:resizewindow_mappings")
+	let g:resizewindow_mappings = 1
+endif
 
+let s:names = { 'h': 'Left', 'j' : 'Down', 'k' : 'Up', 'l' : 'Right' }
 let s:flags = { 'h' : '<', 'j' : '+', 'k' : '-', 'l' : '>' }
 
 for s:direction in [ 'h', 'j', 'k', 'l' ] " {{{
-	if !has_key(s:mappings, s:direction)
-		let s:mappings[s:direction] = '<C-W><C-' . toupper(s:direction) . '>'
-	elseif empty(s:mappings[s:direction])
-		continue
-	endif
 	for s:mode in [ 'n', 'x', 'o' ]
-		let s:map = s:mode . 'noremap'
-		let s:lhs = '<silent>' . s:mappings[s:direction]
+		let s:map = s:mode . 'noremap <silent>'
+		let s:lhs = '<Plug>ResizeWindow' . s:names[s:direction]
 		let s:d = "'" . s:flags[s:direction] . "'"
 		let s:args = join([ 'v:count1', s:d ], ', ')
 		let s:rhs = ':<C-U>call <SID>ResizeWindow(' . s:args . ')<CR>'
 		execute s:map s:lhs s:rhs
+
+		if !hasmapto(s:lhs, s:mode) && g:resizewindow_mappings
+			let s:map2 = s:mode . 'map'
+			let s:keys = '<C-W><C-' . toupper(s:direction) . '>'
+			execute s:map2 s:keys s:lhs
+		endif
 	endfor
 endfor " }}}
 
