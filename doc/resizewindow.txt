@@ -11,32 +11,27 @@ most window.
 
 MAPPINGS					*resizewindow-mappings*
 
-						*resizewindow-CTRL-W_CTRL_H*
-CTRL-W CTRL-H	Resize current window to the left by N (default 1).
+<Plug>ResizeWindowLeft				*resizewindow-left*
+CTRL-W CTRL-H		Resize current window to the left by N (default 1).
 
-						*resizewindow-CTRL-W_CTRL_J*
-CTRL-W CTRL-J	Resize current window downwards by N (default 1).
+<Plug>ResizeWindowDown				*resizewindow-down*
+CTRL-W CTRL-J		Resize current window downwards by N (default 1).
 
-						*resizewindow-CTRL-W_CTRL_K*
-CTRL-W CTRL-K	Resize current window upwards by N (default 1).
+<Plug>ResizeWindowUp				*resizewindow-up*
+CTRL-W CTRL-K		Resize current window upwards by N (default 1).
 
-						*resizewindow-CTRL-W_CTRL_L*
-CTRL-W CTRL-L	Resize current window to the right by N (default 1).
+<Plug>ResizeWindowRight				*resizewindow-right*
+CTRL-W CTRL-L		Resize current window to the right by N (default 1).
 
 CUSTOMIZATION					*resizewindow-customization*
 
-						*g:resizewindow_mappings*
-Use |g:resizewindow_mappings| to replace the default mappings.
+						*g:resizewindow_nomap*
+Use `g:resizewindow_nomap` to get `<Plug>` mappings only.
 E.g.,
 >
-	let g:resizewindow_mappings = {
-	\ 'h' : '<C-W><',
-	\ 'j' : '<C-W>+',
-	\ 'k' : '<C-W>-',
-	\ 'l' : '<C-W>>'
-	\ }
+	nmap <C-W>< <Plug>ResizeWindowLeft
+	nmap <C-W>+ <Plug>ResizeWindowDown
+	nmap <C-W>- <Plug>ResizeWindowUp
+	nmap <C-W>> <Plug>ResizeWindowRight
 <
-Unspecified entries will still use the default mappings.
-Set the value to an empty string to disable the mapping.
-
- vim:tw=78:ts=8:ft=help:norl:
+ vim:tw=78:ts=8:noet:ft=help:norl:

@@ -1,7 +1,4 @@
-More intuitive way to resize windows in Vim
-===========================================
-
-[![Build Status](https://travis-ci.org/chaoren/vim-resizewindow.svg?branch=master)](https://travis-ci.org/chaoren/vim-resizewindow)
+# More intuitive way to resize windows in Vim [![Build Status][1]][2]
 
 This plugin provides direction based resizing of windows.
 
@@ -10,21 +7,21 @@ disorienting since `<C-W><` and `<C-W>>` look like they should always be moving
 the window divider left and right, respectively, but they don't if you're in the
 right most window.
 
-Customization
-=============
+## Customization
 
 The default mappings are `<C-W><C-H>`, `<C-W><C-J>`, `<C-W><C-K>`, and
 `<C-W><C-L>`.
 
-Use `g:resizewindow_mappings` to replace the default mappings.  
+### `g:resizewindow_nomap`
+
+Use `g:resizewindow_nomap` to get `<Plug>` mappings only.\
 E.g.,
 ```
-let g:resizewindow_mappings = {
-\ 'h' : '<C-W><',
-\ 'j' : '<C-W>+',
-\ 'k' : '<C-W>-',
-\ 'l' : '<C-W>>'
-\ }
+nmap <C-W>< <Plug>ResizeWindowLeft
+nmap <C-W>+ <Plug>ResizeWindowDown
+nmap <C-W>- <Plug>ResizeWindowUp
+nmap <C-W>> <Plug>ResizeWindowRight
 ```
-Unspecified entries will still use the default mappings.  
-Set the value to an empty string to disable the mapping.
+
+[1]: https://travis-ci.com/chaoren/vim-resizewindow.svg?branch=master
+[2]: https://travis-ci.com/chaoren/vim-resizewindow
