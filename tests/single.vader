@@ -1,0 +1,24 @@
+Before (Save window size):
+  AssertEqual 1, winnr('$')
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Execute (Resize single window left):
+  execute 'normal' "\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  AssertEqual width, winwidth(0)
+
+Execute (Resize single window down):
+  execute 'normal' "\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  AssertEqual height, winheight(0)
+
+Execute (Resize single window up):
+  execute 'normal' "\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  AssertEqual height, winheight(0)
+
+Execute (Resize single window right):
+  execute 'normal' "\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  AssertEqual width, winwidth(0)

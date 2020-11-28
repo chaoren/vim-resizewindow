@@ -1,12 +1,21 @@
 function resizewindow#resize(times, direction)
+	if winnr('$') == 1
+		return
+	endif
 	let l:direction = a:direction
-	let l:movement = { '<' : 'l', '-' : 'j', '+' : 'j', '>' : 'l' }
-	let l:opposite = { '<' : '>', '-' : '+', '+' : '-', '>' : '<' }
+	let l:movements = { '<' : 'l', '-' : 'j', '+' : 'j', '>' : 'l' }
 	let l:winnr = winnr()
-	execute 'wincmd' l:movement[l:direction]
+	let l:movement = l:movements[l:direction]
+	execute 'wincmd' l:movement
 	if winnr() == l:winnr
-		let l:direction = l:opposite[l:direction]
-	else
+		execute 'wincmd' { 'l' : 'h', 'j' : 'k' }[l:movement]
+		if winnr() == l:winnr
+			return
+		endif
+		let l:opposites = { '<' : '>', '-' : '+', '+' : '-', '>' : '<' }
+		let l:direction = l:opposites[l:direction]
+	endif
+	if winnr() != l:winnr
 		execute l:winnr . 'wincmd' 'w'
 	endif
 	execute a:times 'wincmd' l:direction

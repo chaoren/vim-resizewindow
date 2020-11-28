@@ -1,0 +1,30 @@
+After (Close all extra windows):
+  for @_ in range(3)
+    close
+  endfor
+  AssertEqual 1, winnr('$')
+
+Before (Simple split):
+  vsplit | windo split
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Execute (Resize by 3 to the left):
+  execute 'normal' "3\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  AssertEqual 3, abs(width - winwidth(0))
+
+Execute (Resize by 4 to the bottom):
+  execute 'normal' "4\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  AssertEqual 4, abs(height - winheight(0))
+
+Execute (Resize by 5 to the top):
+  execute 'normal' "5\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  AssertEqual 5, abs(height - winheight(0))
+
+Execute (Resize by 6 to the right):
+  execute 'normal' "6\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  AssertEqual 6, abs(width - winwidth(0))

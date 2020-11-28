@@ -1,0 +1,32 @@
+After (Close all extra windows):
+  for @_ in range(2)
+    close
+  endfor
+  AssertEqual 1, winnr('$')
+
+Before (Make 3 vertical splits and go to left most):
+  vsplit | vsplit
+  AssertEqual 3, winnr('$')
+  1wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Execute (Resize left most window left):
+  execute 'normal' "\<C-W>\<C-H>"
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) < width
+
+Execute (Resize left most window down):
+  execute 'normal' "\<C-W>\<C-J>"
+  AssertEqual width, winwidth(0)
+  AssertEqual height, winheight(0)
+
+Execute (Resize left most window up):
+  execute 'normal' "\<C-W>\<C-K>"
+  AssertEqual width, winwidth(0)
+  AssertEqual height, winheight(0)
+
+Execute (Resize left most window right):
+  execute 'normal' "\<C-W>\<C-L>"
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) > width
