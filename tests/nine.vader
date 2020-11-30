@@ -1,0 +1,133 @@
+After (Close all extra windows):
+  for @_ in range(8)
+    close
+  endfor
+  AssertEqual 1, winnr('$')
+
+Before (Make 9 windows and go to top left):
+  vsplit | vsplit | windo split | split
+  AssertEqual 9, winnr('$')
+  1wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Do (Resize top left window left):
+  \<C-W>\<C-H>
+
+Then (Assert that width decreased):
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) < width
+
+Do (Resize top left window down):
+  \<C-W>\<C-J>
+
+Then (Assert that height increased):
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) > height
+
+Do (Resize top left window up):
+  \<C-W>\<C-K>
+
+Then (Assert that height decreased):
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) < height
+
+Do (Resize top left window right):
+  \<C-W>\<C-L>
+
+Then (Assert that width increased):
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) > width
+
+Before (Make 9 windows and go to bottom right):
+  vsplit | vsplit | windo split | split
+  AssertEqual 9, winnr('$')
+  9wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+
+Do (Resize bottom right window left):
+  \<C-W>\<C-H>
+
+Then (Asssert that width inreased):
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) > width
+
+Do (Resize bottom right window down):
+  \<C-W>\<C-J>
+
+Then (Asssert that height decreased):
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) < height
+
+Do (Resize bottom right window up):
+  \<C-W>\<C-K>
+
+Then (Assert that height increased):
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) > height
+
+Do (Resize bottom right window right):
+  \<C-W>\<C-L>
+
+Then (Assert that width decreased):
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) < width
+
+Before (Make 9 windows and go to center):
+  vsplit | vsplit | windo split | split
+  AssertEqual 9, winnr('$')
+  5wincmd w
+  let width = winwidth(0)
+  let height = winheight(0)
+  wincmd h
+  let left = winnr()
+  2wincmd l
+  let right = winnr()
+  wincmd h
+  wincmd k
+  let top = winnr()
+  2wincmd j
+  let bottom = winnr()
+  wincmd k
+  let left_width = winwidth(left)
+  let right_width = winwidth(right)
+  let top_height = winheight(top)
+  let bottom_height = winheight(bottom)
+  AssertEqual 5, winnr()
+
+Do (Resize middle window left):
+  \<C-W>\<C-H>
+
+Then (Assert that width given to right window):
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) < width
+  AssertEqual left_width, winwidth(left)
+  Assert winwidth(right) > right_width
+
+Do (Resize middle window down):
+  \<C-W>\<C-J>
+
+Then (Assert that height taken from bottom window):
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) > height
+  AssertEqual top_height, winheight(top)
+  Assert winheight(bottom) < bottom_height
+
+Do (Resize middle window up):
+  \<C-W>\<C-K>
+
+Then (Assert that height given to bottom window):
+  AssertEqual width, winwidth(0)
+  Assert winheight(0) < height
+  AssertEqual top_height, winheight(top)
+  Assert winheight(bottom) > bottom_height
+
+Do (Resize middle window right):
+  \<C-W>\<C-L>
+
+Then (Assert that width taken from right window):
+  AssertEqual height, winheight(0)
+  Assert winwidth(0) > width
+  AssertEqual left_width, winwidth(left)
+  Assert winwidth(right) < right_width

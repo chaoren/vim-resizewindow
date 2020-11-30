@@ -11,22 +11,30 @@ Before (Make 3 horizontal splits and go to top most):
   let width = winwidth(0)
   let height = winheight(0)
 
-Execute (Resize top most window left):
-  execute 'normal' "\<C-W>\<C-H>"
+Do (Resize top most window left):
+  \<C-W>\<C-H>
+
+Then (Assert that width didn't change):
   AssertEqual height, winheight(0)
   AssertEqual width, winwidth(0)
 
-Execute (Resize top most window down):
-  execute 'normal' "\<C-W>\<C-J>"
+Do (Resize top most window down):
+  \<C-W>\<C-J>
+
+Then (Assert that height increased):
   AssertEqual width, winwidth(0)
   Assert winheight(0) > height
 
-Execute (Resize top most window up):
-  execute 'normal' "\<C-W>\<C-K>"
+Do (Resize top most window up):
+  \<C-W>\<C-K>
+
+Then (Assert that height decreased):
   AssertEqual width, winwidth(0)
   Assert winheight(0) < height
 
-Execute (Resize top most window right):
-  execute 'normal' "\<C-W>\<C-L>"
+Do (Resize top most window right):
+  \<C-W>\<C-L>
+
+Then (Assert that width didn't change):
   AssertEqual height, winheight(0)
   AssertEqual width, winwidth(0)

@@ -3,22 +3,30 @@ Before (Save window size):
   let width = winwidth(0)
   let height = winheight(0)
 
-Execute (Resize single window left):
-  execute 'normal' "\<C-W>\<C-H>"
+Do (Resize single window left):
+  \<C-W>\<C-H>
+
+Then (Assert that nothing changed):
   AssertEqual height, winheight(0)
   AssertEqual width, winwidth(0)
 
-Execute (Resize single window down):
-  execute 'normal' "\<C-W>\<C-J>"
+Do (Resize single window down):
+  \<C-W>\<C-J>
+
+Then (Assert that nothing changed):
   AssertEqual width, winwidth(0)
   AssertEqual height, winheight(0)
 
-Execute (Resize single window up):
-  execute 'normal' "\<C-W>\<C-K>"
+Do (Resize single window up):
+  \<C-W>\<C-K>
+
+Then (Assert that nothing changed):
   AssertEqual width, winwidth(0)
   AssertEqual height, winheight(0)
 
-Execute (Resize single window right):
-  execute 'normal' "\<C-W>\<C-L>"
+Do (Resize single window right):
+  \<C-W>\<C-L>
+
+Then (Assert that nothing changed):
   AssertEqual height, winheight(0)
   AssertEqual width, winwidth(0)

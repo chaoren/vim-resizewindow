@@ -6,25 +6,34 @@ After (Close all extra windows):
 
 Before (Simple split):
   vsplit | windo split
+  1wincmd w
   let width = winwidth(0)
   let height = winheight(0)
 
-Execute (Resize by 3 to the left):
-  execute 'normal' "3\<C-W>\<C-H>"
+Do (Resize by 3 to the left):
+  3\<C-W>\<C-H>
+
+Then (Assert that width decreased by 3):
   AssertEqual height, winheight(0)
-  AssertEqual 3, abs(width - winwidth(0))
+  AssertEqual -3, winwidth(0) - width
 
-Execute (Resize by 4 to the bottom):
-  execute 'normal' "4\<C-W>\<C-J>"
+Do (Resize by 4 to the bottom):
+  4\<C-W>\<C-J>
+
+Then (Assert that height increased by 4):
   AssertEqual width, winwidth(0)
-  AssertEqual 4, abs(height - winheight(0))
+  AssertEqual 4, winheight(0) - height
 
-Execute (Resize by 5 to the top):
-  execute 'normal' "5\<C-W>\<C-K>"
+Do (Resize by 5 to the top):
+  5\<C-W>\<C-K>
+
+Then (Assert that width decreased by 5):
   AssertEqual width, winwidth(0)
-  AssertEqual 5, abs(height - winheight(0))
+  AssertEqual -5, winheight(0) - height
 
-Execute (Resize by 6 to the right):
-  execute 'normal' "6\<C-W>\<C-L>"
+Do (Resize by 6 to the right):
+  6\<C-W>\<C-L>
+
+Then (Assert that width increased by 6):
   AssertEqual height, winheight(0)
-  AssertEqual 6, abs(width - winwidth(0))
+  AssertEqual 6, winwidth(0) - width
