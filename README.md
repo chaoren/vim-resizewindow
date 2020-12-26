@@ -16,7 +16,7 @@ The default mappings are `<C-W><C-H>`, `<C-W><C-J>`, `<C-W><C-K>`, and
 
 Use `g:resizewindow_nomap` to get `<Plug>` mappings only.\
 E.g.,
-```
+```vim
 nmap <C-W>< <Plug>ResizeWindowLeft
 nmap <C-W>+ <Plug>ResizeWindowDown
 nmap <C-W>- <Plug>ResizeWindowUp
