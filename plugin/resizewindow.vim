@@ -3,10 +3,10 @@ if exists('g:loaded_resizewindow')
 endif
 let g:loaded_resizewindow = 1
 
-nnoremap <silent><Plug>ResizeWindowLeft  :<C-U>call resizewindow#resize(v:count1, '<')<CR>
-nnoremap <silent><Plug>ResizeWindowDown  :<C-U>call resizewindow#resize(v:count1, '+')<CR>
-nnoremap <silent><Plug>ResizeWindowUp    :<C-U>call resizewindow#resize(v:count1, '-')<CR>
-nnoremap <silent><Plug>ResizeWindowRight :<C-U>call resizewindow#resize(v:count1, '>')<CR>
+nnoremap <silent><Plug>ResizeWindowLeft  <Cmd>call resizewindow#resize(v:count1, '<')<CR>
+nnoremap <silent><Plug>ResizeWindowDown  <Cmd>call resizewindow#resize(v:count1, '+')<CR>
+nnoremap <silent><Plug>ResizeWindowUp    <Cmd>call resizewindow#resize(v:count1, '-')<CR>
+nnoremap <silent><Plug>ResizeWindowRight <Cmd>call resizewindow#resize(v:count1, '>')<CR>
 
 if !get(g:, 'resizewindow_nomap', 0)
 	nmap <C-W><C-H> <Plug>ResizeWindowLeft
