@@ -1,3 +1,9 @@
+let s:cmd = v:version >= 802 ? "\<Cmd>" : ":\<C-U>"
+
+function resizewindow#cmd(expr)
+	return s:cmd.a:expr
+endfunction
+
 function resizewindow#resize(times, direction)
 	if winnr('$') == 1
 		return
@@ -16,7 +22,7 @@ function resizewindow#resize(times, direction)
 		let l:direction = l:opposites[l:direction]
 	endif
 	if winnr() != l:winnr
-		execute l:winnr . 'wincmd' 'w'
+		execute l:winnr.'wincmd' 'w'
 	endif
 	execute a:times 'wincmd' l:direction
 endfunction
