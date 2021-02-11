@@ -1,4 +1,4 @@
-let s:cmd = v:version >= 802 ? "\<Cmd>" : ":\<C-U>"
+let s:cmd = has('patch-8.2.1978') ? "\<Cmd>" : ":\<C-U>"
 
 function resizewindow#cmd(expr)
 	return s:cmd.a:expr
