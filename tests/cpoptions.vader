@@ -1,0 +1,30 @@
+Execute (Set cpoptions):
+  Save &cpoptions
+  set cpoptions+=<
+  nmapclear
+  unlet g:loaded_resizewindow
+  runtime plugin/resizewindow.vim
+
+Before (Split window):
+  split
+  AssertEqual 2, winnr('$')
+  1wincmd w
+  let height = winheight(0)
+
+After (Close window):
+  close
+
+Do (Resize top window down):
+  \<C-W>\<C-J>
+
+Then (Assert that height increased):
+  Assert winheight(0) > height
+
+Do (Resize top window up):
+  \<C-W>\<C-K>
+
+Then (Assert that height decreased):
+  Assert winheight(0) < height
+
+Execute (Restore cpoptions):
+  Restore &cpoptions

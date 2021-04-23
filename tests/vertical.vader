@@ -1,15 +1,15 @@
-After (Close all extra windows):
-  for @_ in range(2)
-    close
-  endfor
-  AssertEqual 1, winnr('$')
-
 Before (Make 3 vertical splits and go to left most):
   vsplit | vsplit
   AssertEqual 3, winnr('$')
   1wincmd w
   let width = winwidth(0)
   let height = winheight(0)
+
+After (Close all extra windows):
+  for @_ in range(2)
+    close
+  endfor
+  AssertEqual 1, winnr('$')
 
 Do (Resize left most window left):
   \<C-W>\<C-H>

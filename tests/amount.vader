@@ -1,14 +1,14 @@
-After (Close all extra windows):
-  for @_ in range(3)
-    close
-  endfor
-  AssertEqual 1, winnr('$')
-
 Before (Simple split):
   vsplit | windo split
   1wincmd w
   let width = winwidth(0)
   let height = winheight(0)
+
+After (Close all extra windows):
+  for @_ in range(3)
+    close
+  endfor
+  AssertEqual 1, winnr('$')
 
 Do (Resize by 3 to the left):
   3\<C-W>\<C-H>
