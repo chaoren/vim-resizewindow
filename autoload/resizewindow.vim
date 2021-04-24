@@ -1,7 +1,7 @@
 let s:cmd = has('patch-8.2.1978') ? "\<Cmd>" : ":\<C-U>"
 
 function resizewindow#cmd(expr)
-	return s:cmd.a:expr
+	return s:cmd.a:expr."\<CR>"
 endfunction
 
 function resizewindow#resize(times, direction)
