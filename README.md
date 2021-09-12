@@ -24,5 +24,5 @@ nmap <C-W>- <Plug>ResizeWindowUp
 nmap <C-W>> <Plug>ResizeWindowRight
 ```
 
-[1]: https://travis-ci.com/chaoren/vim-resizewindow.svg?branch=master
-[2]: https://travis-ci.com/chaoren/vim-resizewindow
+[1]: https://app.travis-ci.com/chaoren/vim-resizewindow.svg?branch=master
+[2]: https://app.travis-ci.com/chaoren/vim-resizewindow
