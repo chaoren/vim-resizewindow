@@ -1,7 +1,6 @@
 Execute (Set cpoptions):
   Save &cpoptions
   set cpoptions+=<
-  nmapclear
   unlet g:loaded_resizewindow
   runtime plugin/resizewindow.vim
 
