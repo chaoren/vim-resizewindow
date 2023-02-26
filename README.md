@@ -1,4 +1,4 @@
-# More intuitive way to resize windows in Vim [![Build Status][1]][2]
+# More intuitive way to resize windows in Vim
 
 This plugin provides direction based resizing of windows.
 
@@ -23,6 +23,3 @@ nmap <C-W>+ <Plug>ResizeWindowDown
 nmap <C-W>- <Plug>ResizeWindowUp
 nmap <C-W>> <Plug>ResizeWindowRight
 ```
-
-[1]: https://app.travis-ci.com/chaoren/vim-resizewindow.svg?branch=master
-[2]: https://app.travis-ci.com/chaoren/vim-resizewindow
